@@ -5,8 +5,7 @@ import scrapy
 class Pic(scrapy.Spider):
     name = "Pic"
     start_urls = [
-        "http://jandan.net/pic",
-        "http://jandan.net/pic-2016"
+        "http://jandan.net/pic"
     ]
 
     def parse(self, response):
@@ -19,7 +18,7 @@ class Pic(scrapy.Spider):
             xx_num = int(quote.css("span[id^='cos_unsupport']").xpath(
                 "text()").extract_first())
             score = oo_num - xx_num
-            if score >= 300:  # Minimum score needed to download.
+            if score >= 500:  # Minimum score needed to download.
                 pics = quote.css(".view_img_link").xpath("@href").extract()
                 pics = ["http:" + link for link in pics]
                 yield {
